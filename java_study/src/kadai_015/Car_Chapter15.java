@@ -5,31 +5,35 @@ public class Car_Chapter15 {
 
 		private int gear = 1;
 		private int spead = 10;
+		private int gearspead = 10;
 		
 		//コンストラクタの生成初期設定の代入
 		public Car_Chapter15(int gear, int spead){
 			this.gear = gear;
 			this.spead = spead;
+			this.gearspead = gear * spead;
 			
 		}
 		
 		public void changeGear(final int afterGear) {
-			if(this.gear < afterGear) {
-				this.gear = afterGear * 1;
-				System.out.println("ギア1から" + this.gear + "に切り替えました");
-				return;
-			}
-			this.gear = afterGear * 1;
-			System.out.println("ギア1から" + this.gear + "に切り替えました");
+			int beforeGear = this.gear; // 変更前のギアを保存
+		    this.gear = afterGear;
+
+		    if (this.gear < 1 || this.gear > 5) {
+		        this.gearspead = 10;
+		    } else {
+		        this.gearspead = this.gear * this.spead;
+		    }
+
+		    System.out.println("ギア" + beforeGear + "から" + this.gear + "に切り替えました");
 		}
 		
 		public void run() {
-			int spead = this.gear * 10;
-			if((spead >= 10) && (spead <= 50)) {
-				System.out.println("速度は時速" + spead + "kmです");
+			if((this.gearspead >= 10) && (this.gearspead <= 50)) {
+				System.out.println("速度は時速" + this.gearspead + "kmです");
 			}else {
 				
-			System.out.println("速度は時速10kmです");
+			System.out.println("速度は時速" + this.gearspead + "kmです");
 			}
 		}
 
